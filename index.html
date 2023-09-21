@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <title>Cordoba Tecno - Carrito de Compras</title>
+</head>
+<body>
+    <header id="header">
+        <h1>Córdoba Tecno</h1>
+        <img onclick="mostrarCarritoDeCompras()" src="img/carrito-de-compras.png" class="carrito" alt="Carrito Compras">
+        <img onclick="buscarProductoPorNombre()" src="img/search.svg" class="carrito" alt="Buscar Compras por Nombre">
+        <img onclick="calcularTotalCompra()" src="img/info-circle-fill.svg" class="carrito" alt="Total de Compras">
+    </header>
+    <div class="contenedor" id="contenedor">
+        <div>
+            <img src="img/imagen1.webp" alt="MacBook">
+            <div class="informacion">
+                <p>MacBook</p>
+                <p class="precio">$999<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('MacBook','Apple','Notebook',999.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen9.webp" alt="ThinkPad">
+            <div class="informacion">
+                <p>Ipad</p>
+                <p class="precio">$399<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('Ipad','Apple','Tablet',399.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen7.webp" alt="Apple Watch">
+            <div class="informacion">
+                <p>Apple Watch</p>
+                <p class="precio">$259<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('Apple Watch','Apple','Smartwatch',259.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen10.webp" alt="ThinkPad">
+            <div class="informacion">
+                <p>ThinkPad</p>
+                <p class="precio">$699<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('ThinkPad','Lenovo','Notebook',659.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen11.webp" alt="PlayStation 5">
+            <div class="informacion">
+                <p>PlayStation 5</p>
+                <p class="precio">$999<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('PlayStation 5','Sony','Consolas',999.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen12.webp" alt="Samsung S22">
+            <div class="informacion">
+                <p>Samsung S22</p>
+                <p class="precio">$359<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('Samsung S22','Samsung','Telefonos',359.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen13.webp" alt="XBOX Series">
+            <div class="informacion">
+                <p>XBOX Series</p>
+                <p class="precio">$899<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('XBOX Series','Microsoft','Consolas',899.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen14.webp" alt="Iphone 14">
+            <div class="informacion">
+                <p>Iphone 14</p>
+                <p class="precio">$1099<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('Iphone 14','Apple','Telefonos',1099.99)">Comprar</button>
+            </div>
+        </div>
+        <div>
+            <img src="img/imagen15.webp" alt="Auriculares Sony">
+            <div class="informacion">
+                <p>Auriculares Sony</p>
+                <p class="precio">$69<span>.99</span></p>
+                <button onclick="agregarProductoAlCarrito('Auriculares Sony','Sony','Sonido',69.99)">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
