@@ -17,7 +17,7 @@ const añadirImagen = document.getElementById('imagenAñadir');
 
 
 //Añadir Producto
-document.getElementById("botonAñadir").addEventListener("click", function(event){
+document.getElementById("botonAñadir").addEventListener("click", function (event) {
     event.preventDefault();
 
     let productoAñadir = añadirProducto.value;
