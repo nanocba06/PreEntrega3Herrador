@@ -144,7 +144,7 @@ window.addEventListener("load", () =>{
     mostrarProductos.innerHTML = "";
     
     for (let i = 0; i < productos.length; i++){
-        mostrarProductos.innerHTML += `<div class="contenedorProductos"><img src="${productos[i].urlImagen}"><div class="informacion"><p>${productos[i].nombre}</p><p class="precio"><span>Precio: ${productos[i].valor}$</span></p>Existencia: ${productos[i].stock}</p></div></div>`;
+        mostrarProductos.innerHTML += `<div class="contenedorProductos"><img src="${productos[i].urlImagen}"><div class="informacion"><p>${productos[i].nombre}</p><p class="precio"><span>Precio: ${productos[i].valor}$</span></p>Cantidad: ${productos[i].stock}</p></div></div>`;
     }
 })
 

@@ -33,6 +33,60 @@ window.addEventListener("scroll", function(){
 })
 
 window.addEventListener('load', () => {
+
+  console.log(productos);
+
+  if(productos.length === 0){
+    console.log("Cargo Productos");
+
+    productos.push({
+      nombre: "Samsung S20 FE",
+      valor: 520,
+      stock: 12,
+      urlImagen: "https://www.trustedreviews.com/wp-content/uploads/sites/54/2020/10/X1008276-920x613.jpg"
+  });
+
+  productos.push({
+    nombre: "Iphone 14",
+    valor: 990,
+    stock: 5,
+    urlImagen: "https://www.digitaltrends.com/wp-content/uploads/2022/10/iphone-14-pro-max-hero-photo.jpg"
+  });
+
+  productos.push({
+    nombre: "Ipad Pro 11",
+    valor: 600,
+    stock: 0,
+    urlImagen: "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2020/03/persona-sujetando-ipad-pro-11-pulgadas-1883545.jpg"
+  });
+  
+  productos.push({
+    nombre: "Play Station 5",
+    valor: 1000,
+    stock: 6,
+    urlImagen: "https://topesdegama.com/app/uploads-topesdegama.com/2022/08/PS5.jpg"
+  });
+
+  productos.push({
+    nombre: "Moto G13",
+    valor: 230,
+    stock: 10,
+    urlImagen: "https://images.expertreviews.co.uk/wp-content/uploads/2023/07/motorola-moto-g13-review-4_0.jpg"
+  });
+  
+  productos.push({
+    nombre: "Macbook Pro 13",
+    valor: 1500,
+    stock: 15,
+    urlImagen: "https://i.blogs.es/d4848b/analisis-macbook-pro-13-2020-applesfera-07/1366_2000.jpg"
+  });   
+
+  guardarAlmacenamientoLocal('productos', productos);
+
+  }
+  else{
+    console.log("No cargo nada");
+  }
   visualizarProductos();
   contenedorCompra.classList.add("none")
 })

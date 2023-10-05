@@ -275,3 +275,14 @@ header{
     justify-content: center;
     align-items: center;
 }
+
+.admin {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    z-index: 1;
+    filter: invert(100%);
+    cursor: pointer;
+    width: 45px;
+    height: auto;
+}
