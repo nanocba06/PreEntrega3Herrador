@@ -39,6 +39,7 @@ window.addEventListener('load', () => {
   if(productos.length === 0){
     console.log("Cargo Productos");
 
+    //Si el listado de productos esta vacio cargo por defecto 6 articulos
     productos.push({
       nombre: "Samsung S20 FE",
       valor: 520,
@@ -84,9 +85,7 @@ window.addEventListener('load', () => {
   guardarAlmacenamientoLocal('productos', productos);
 
   }
-  else{
-    console.log("No cargo nada");
-  }
+  
   visualizarProductos();
   contenedorCompra.classList.add("none")
 })
@@ -110,7 +109,6 @@ function visualizarProductos() {
       event.preventDefault();
       // Guardo el dataset ID que está en el HTML del botón Agregar al carrito
       const idProducto = Number(boton.dataset.id);
-      // Uso el método de la base de datos para ubicar el producto según el ID
       
       // Llama al método agregar del carrito
       comprar(idProducto);
