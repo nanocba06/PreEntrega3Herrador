@@ -286,3 +286,7 @@ header{
     width: 45px;
     height: auto;
 }
+
+.finalizarCompra {
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Cordoba Tecno - Carrito de Compras</title>
 </head>
 <body>
@@ -22,13 +23,13 @@
 
     <div id="contenedorCompra">
         <div class="informacionCompra" id="informacionCompra">
-            <h2>Cesta</h2>
+            <h2>Carrito</h2>
             <p class="x" id="x">x</p>
         </div>
 
         <div class="productosCompra" id="productosCompra"></div>
         <div class="total" id="total"></div>
-        <button>Finalizar Compra</button>
+        <button class="finalizarCompra" id="finalizarCompra">Finalizar Compra</button>
     </div>
     <footer>
         <div>
@@ -37,5 +38,7 @@
     </footer>
     
     <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 </html>

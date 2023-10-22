@@ -7,7 +7,17 @@ function obtenerAlmacenamientoLocal(llave){
   return datos;
 }
 
+function guardarAlmacenamientoCarrito(llavec, valor_a_guardar_carrito){
+  localStorage.setItem(llavec, JSON.stringify(valor_a_guardar_carrito));
+}
+
+function obtenerAlmacenamientoCarrito(llavec){
+  const datos = JSON.parse(localStorage.getItem(llavec));
+  return datos;
+}
+
 let productos = obtenerAlmacenamientoLocal('productos') || [];
+let lista = obtenerAlmacenamientoCarrito('lista') || [];
 
 const informacionCompra = document.getElementById('informacionCompra');
 const contenedorCompra = document.getElementById('contenedorCompra');
@@ -19,8 +29,8 @@ const header = document.querySelector("#header");
 const total = document.getElementById('total');
 const body = document.querySelector("body");
 const x = document.getElementById('x');
+const finalizarCompra = document.getElementById('finalizarCompra');
 
-let lista = [];
 let valortotal = 0;
 
 window.addEventListener("scroll", function(){
@@ -34,61 +44,46 @@ window.addEventListener("scroll", function(){
 
 window.addEventListener('load', () => {
 
-  console.log(productos);
+  console.log(productos.length);
 
   if(productos.length === 0){
     console.log("Cargo Productos");
 
     //Si el listado de productos esta vacio cargo por defecto 6 articulos
-    productos.push({
-      nombre: "Samsung S20 FE",
-      valor: 520,
-      stock: 12,
-      urlImagen: "https://www.trustedreviews.com/wp-content/uploads/sites/54/2020/10/X1008276-920x613.jpg"
-  });
 
-  productos.push({
-    nombre: "Iphone 14",
-    valor: 990,
-    stock: 5,
-    urlImagen: "https://www.digitaltrends.com/wp-content/uploads/2022/10/iphone-14-pro-max-hero-photo.jpg"
-  });
+    jsonUrl = './json/productos.json';
+    fetch(jsonUrl)
+      .then(response => response.json())
+      .then(data => cargarData(data))
 
-  productos.push({
-    nombre: "Ipad Pro 11",
-    valor: 600,
-    stock: 0,
-    urlImagen: "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2020/03/persona-sujetando-ipad-pro-11-pulgadas-1883545.jpg"
-  });
-  
-  productos.push({
-    nombre: "Play Station 5",
-    valor: 1000,
-    stock: 6,
-    urlImagen: "https://topesdegama.com/app/uploads-topesdegama.com/2022/08/PS5.jpg"
-  });
+    const cargarData = (data) => {
+      console.log(data);
 
-  productos.push({
-    nombre: "Moto G13",
-    valor: 230,
-    stock: 10,
-    urlImagen: "https://images.expertreviews.co.uk/wp-content/uploads/2023/07/motorola-moto-g13-review-4_0.jpg"
-  });
-  
-  productos.push({
-    nombre: "Macbook Pro 13",
-    valor: 1500,
-    stock: 15,
-    urlImagen: "https://i.blogs.es/d4848b/analisis-macbook-pro-13-2020-applesfera-07/1366_2000.jpg"
-  });   
+      for(let i = 0; i < data.length; i++){
 
-  guardarAlmacenamientoLocal('productos', productos);
-
+        productos.push({
+          nombre: data[i].nombre,
+          valor: data[i].valor,
+          stock: data[i].stock,
+          urlImagen: data[i].urlImagen
+      });
+      }
+      console.log("Info:");
+      console.log(productos);
+      guardarAlmacenamientoLocal('productos', productos);
+      visualizarProductos();
+      contenedorCompra.classList.add("none")
+    }
   }
   
   visualizarProductos();
+  if(lista.length > 0){
+    numero.innerHTML = lista.length
+    numero.classList.add("diseñoNumero")
+  }
   contenedorCompra.classList.add("none")
 })
+
 
 function visualizarProductos() {
   contenedor.innerHTML = ""
@@ -119,6 +114,14 @@ function visualizarProductos() {
 function comprar(indice) {
   lista.push({ nombre: productos[indice].nombre, precio: productos[indice].valor})
 
+  Toastify({
+  text: productos[indice].nombre + " Agregado",
+  className: "info",
+  style: {
+    background: "linear-gradient(to right, #819cc9, #2D4263)",
+  }
+}).showToast();
+
   let van = true
   let i = 0
   while (van == true) {
@@ -129,7 +132,7 @@ function comprar(indice) {
           }
           van = false
       }
-      guardarAlmacenamientoLocal("productos", productos)
+      guardarAlmacenamientoCarrito("lista", lista)
       i += 1
   }
   numero.innerHTML = lista.length
@@ -165,9 +168,27 @@ function mostrarCarritoLista() {
       // Uso el método de la base de datos para ubicar el producto según el ID
       
       // Llama al método agregar del carrito
-      eliminar(idProducto);
+      Swal.fire({
+        title: 'Esta seguro de eliminar el producto?',
+        text: "",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El producto ha sido retirado del carrito.',
+            'success'
+          )
+          eliminar(idProducto);
+        }
+      })
     });
   }
+
 }
 
 function eliminar(indice){
@@ -181,7 +202,7 @@ function eliminar(indice){
       }
       i += 1
   }
-  guardarAlmacenamientoLocal("productos", productos)
+  guardarAlmacenamientoCarrito("lista", lista)
 
   numero.innerHTML = lista.length
   if (lista.length == 0){
@@ -196,4 +217,25 @@ x.addEventListener("click", function(){
   contenedorCompra.classList.add('none')
   contenedorCompra.classList.remove('contenedorCompra')
   informacionCompra.classList.remove('informacionCompra')
+})
+
+finalizarCompra.addEventListener("click", function(){
+  if(lista.length===0){
+    Swal.fire(
+      'Carrito Vacío',
+      'Por favor agregue productos!',
+      'info'
+    )
+  }
+  else{
+    Swal.fire({
+      title: 'Pago - Córdoba Tecno',
+      text: 'Pasarela de Pago.',
+      imageUrl: 'https://http2.mlstatic.com/frontend-assets/home-landing/logo-mercadopago.jpg',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Pasarela de Pago',
+    })
+  }
+
 })
