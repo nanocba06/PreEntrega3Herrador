@@ -1,3 +1,4 @@
+//Funciones para obtener datos de los productos y el carrito del Storage.
 function guardarAlmacenamientoLocal(llave, valor_a_guardar){
   localStorage.setItem(llave, JSON.stringify(valor_a_guardar));
 }
@@ -16,9 +17,11 @@ function obtenerAlmacenamientoCarrito(llavec){
   return datos;
 }
 
+//Definimos los arreglos de productos y la lista del carrito.
 let productos = obtenerAlmacenamientoLocal('productos') || [];
 let lista = obtenerAlmacenamientoCarrito('lista') || [];
 
+//Definimos elementos del DOM.
 const informacionCompra = document.getElementById('informacionCompra');
 const contenedorCompra = document.getElementById('contenedorCompra');
 const productosCompra = document.getElementById('productosCompra');
@@ -42,14 +45,14 @@ window.addEventListener("scroll", function(){
     }
 })
 
+//Creo evento para cargar productos automaticamente y renderizar los mismos.
 window.addEventListener('load', () => {
 
   console.log(productos.length);
 
+  //Si el listado de productos esta vacio cargo por defecto 6 articulos.
   if(productos.length === 0){
     console.log("Cargo Productos");
-
-    //Si el listado de productos esta vacio cargo por defecto 6 articulos
 
     jsonUrl = './json/productos.json';
     fetch(jsonUrl)
@@ -84,7 +87,7 @@ window.addEventListener('load', () => {
   contenedorCompra.classList.add("none")
 })
 
-
+//Funcion para renderizar los productos cargados.
 function visualizarProductos() {
   contenedor.innerHTML = ""
   for (let i = 0; i < productos.length; i++) {
@@ -111,6 +114,7 @@ function visualizarProductos() {
   }
 }
 
+//Funcion para incorporar productos al carrito
 function comprar(indice) {
   lista.push({ nombre: productos[indice].nombre, precio: productos[indice].valor})
 
@@ -148,6 +152,7 @@ carrito.addEventListener("click", function(){
   mostrarCarritoLista()
 })
 
+//Funcion para renderizar el carrito
 function mostrarCarritoLista() {
   productosCompra.innerHTML = ""
   valortotal = 0
@@ -161,13 +166,10 @@ function mostrarCarritoLista() {
 
   for (const boton of botonesEliminar) {
     boton.addEventListener("click", (event) => {
-      // Evita el comportamiento default de HTML
+      // Evita el comportamiento default del html
       event.preventDefault();
-      // Guardo el dataset ID que está en el HTML del botón Agregar al carrito
       const idProducto = Number(boton.dataset.id);
-      // Uso el método de la base de datos para ubicar el producto según el ID
-      
-      // Llama al método agregar del carrito
+
       Swal.fire({
         title: 'Esta seguro de eliminar el producto?',
         text: "",
@@ -191,6 +193,7 @@ function mostrarCarritoLista() {
 
 }
 
+//Funcion para eliminar productos del carrito
 function eliminar(indice){
   let van = true
   let i = 0
@@ -212,6 +215,7 @@ function eliminar(indice){
   mostrarCarritoLista()
 }
 
+//Evento para cerrar la ventana del carrito
 x.addEventListener("click", function(){
   body.style.overflow = "auto"
   contenedorCompra.classList.add('none')
@@ -219,6 +223,7 @@ x.addEventListener("click", function(){
   informacionCompra.classList.remove('informacionCompra')
 })
 
+//Evento que llama a una alerta para la finalizacion de la compra
 finalizarCompra.addEventListener("click", function(){
   if(lista.length===0){
     Swal.fire(

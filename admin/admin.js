@@ -1,3 +1,4 @@
+//Funciones para obtener datos de los productos.
 function guardarAlmacenamientoLocal(llave, valor_a_guardar){
     localStorage.setItem(llave, JSON.stringify(valor_a_guardar));
 }
@@ -7,16 +8,18 @@ function obtenerAlmacenamientoLocal(llave){
     return datos;
 }
 
+//Definimos los arreglo de productos.
 let productos = obtenerAlmacenamientoLocal('productos') || [];
-let mensaje = document.getElementById('mensaje');
 
+//Definimos elementos del DOM.
+const mensaje = document.getElementById('mensaje');
 const añadirProducto = document.getElementById('productoAñadir');
 const añadirValor = document.getElementById('valorAñadir');
 const añadirStock = document.getElementById('stockAñadir');
 const añadirImagen = document.getElementById('imagenAñadir');
 
 
-//Añadir Producto
+//Evento para añadir productos
 document.getElementById("botonAñadir").addEventListener("click", function (event) {
     event.preventDefault();
 
@@ -55,11 +58,12 @@ document.getElementById("botonAñadir").addEventListener("click", function (even
     guardarAlmacenamientoLocal('productos', productos);
 })
 
-//Editar
+//Definimos elementos del DOM
 const productoEd = document.getElementById('productoEditar');
 const atributoEd = document.getElementById('atributoEditar');
 const nuevoAtributoEd = document.getElementById('nuevoAtributo');
 
+//Evento para editar productos
 document.getElementById("botonEditar").addEventListener("click", function(event){
     event.preventDefault(); //evita que se recargue la pagina 
 
@@ -95,7 +99,7 @@ document.getElementById("botonEditar").addEventListener("click", function(event)
     }
 })
 
-//Eliminar
+//Definimos elemento del DOM y evento para eliminar producto.
 const productoE = document.getElementById('productoEliminar')
 
 document.getElementById("botonEliminar").addEventListener("click", function(event){
@@ -125,7 +129,7 @@ document.getElementById("botonEliminar").addEventListener("click", function(even
     guardarAlmacenamientoLocal('productos', productos);
 })
 
-// mostrar productos
+// Definimos evento para mostrar los productos agaregados.
 
 window.addEventListener("load", () =>{
     const productoEd = document.getElementById('productoEditar');
